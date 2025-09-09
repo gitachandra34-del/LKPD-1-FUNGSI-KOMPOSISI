@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKPD Fungsi Komposisi Bertingkat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% {
+                transform: translate3d(0,0,0);
+            }
+            40%, 43% {
+                transform: translate3d(0,-30px,0);
+            }
+            70% {
+                transform: translate3d(0,-15px,0);
+            }
+            90% {
+                transform: translate3d(0,-4px,0);
+            }
+        }
+        
+        .animate-bounce {
+            animation: bounce 1s ease-in-out;
+        }
+    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen p-4">
+    <div class="max-w-5xl mx-auto">
+        <!-- Header -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <h1 class="text-3xl font-bold text-center text-indigo-800 mb-2">📚 LKPD Fungsi Komposisi Bertingkat</h1>
+            <p class="text-center text-gray-600">Lembar Kerja Peserta Didik - Komposisi Fungsi Berulang</p>
+            <div class="mt-4 p-4 bg-indigo-50 rounded-lg">
+                <h3 class="font-semibold text-indigo-800 mb-2">🎯 Tujuan Pembelajaran:</h3>
+                <ul class="text-sm text-indigo-700 space-y-1">
+                    <li>• Memahami konsep komposisi fungsi bertingkat (f ∘ f ∘ f)(x)</li>
+                    <li>• Menghitung komposisi fungsi secara berurutan</li>
+                    <li>• Menerapkan langkah-langkah sistematis dalam penyelesaian</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Soal 1 -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">📝 Soal 1</h2>
+            
+            <!-- Diketahui dan Ditanya -->
+            <div class="grid md:grid-cols-2 gap-4 mb-6">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-blue-800 mb-2">Diketahui:</h3>
+                    <p class="text-blue-700 text-lg">f(x) = 2x + 3</p>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <h3 class="font-semibold text-green-800 mb-2">Ditanya:</h3>
+                    <p class="text-green-700 text-lg">Tentukan (f ∘ f ∘ f)(x)</p>
+                </div>
+            </div>
+
+            <!-- Langkah 1 -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                <h3 class="font-semibold text-yellow-800 mb-3">Langkah 1: Memahami Komposisi Fungsi</h3>
+                <p class="text-yellow-700 mb-2">Komposisi fungsi (f ∘ f ∘ f)(x) berarti: <strong>f(f(f(x)))</strong></p>
+                <p class="text-yellow-700">Artinya, kita akan menerapkan fungsi f sebanyak tiga kali secara berurutan.</p>
+            </div>
+
+            <!-- Langkah 2 -->
+            <div class="bg-gray-50 border-l-4 border-gray-400 p-4 mb-4">
+                <h3 class="font-semibold text-gray-800 mb-3">Langkah 2: Menentukan f(f(x)) terlebih dahulu</h3>
+                <div class="space-y-3">
+                    <p class="text-gray-700">Misalkan f(x) = 2x + 3</p>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-gray-700">Maka f(f(x)) = f(</span>
+                        <input type="text" id="step2_1" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                        <span class="text-gray-700">x +</span>
+                        <input type="text" id="step2_2" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                        <span class="text-gray-700">)</span>
+                        <button onclick="checkStep2_1()" class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">Cek</button>
+                        <span id="check2_1" class="text-sm"></span>
+                    </div>
+                    
+                    <p class="text-gray-700 mt-3">Substitusikan (2x + 3) ke dalam fungsi f:</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-gray-700">f(2x + 3) = 2(</span>
+                            <input type="text" id="step2_3" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                            <span class="text-gray-700">+</span>
+                            <input type="text" id="step2_4" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                            <span class="text-gray-700">) +</span>
+                            <input type="text" id="step2_5" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                        </div>
+                        
+                        <div class="flex items-center space-x-2 ml-16">
+                            <span class="text-gray-700">=</span>
+                            <input type="text" id="step2_6" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                            <span class="text-gray-700">+</span>
+                            <input type="text" id="step2_7" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                            <span class="text-gray-700">+ 3</span>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2 ml-16">
+                            <span class="text-gray-700">= 4x +</span>
+                            <input type="text" id="step2_8" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                            <button onclick="checkStep2_2()" class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">Cek</button>
+                            <span id="check2_2" class="text-sm"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3 p-3 bg-blue-100 rounded">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-blue-800 font-semibold">Jadi, (f ∘ f)(x) = f(f(x)) =</span>
+                            <input type="text" id="step2_final1" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                            <span class="text-blue-800">x +</span>
+                            <input type="text" id="step2_final2" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                            <button onclick="checkStep2Final()" class="bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600">Cek</button>
+                            <span id="check2_final" class="text-sm"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Langkah 3 -->
+            <div class="bg-purple-50 border-l-4 border-purple-400 p-4 mb-4">
+                <h3 class="font-semibold text-purple-800 mb-3">Langkah 3: Menentukan f(f(f(x)))</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-purple-700">Sekarang, kita akan mencari f(f(f(x))) = f((f ∘ f)(x)) = f(</span>
+                        <input type="text" id="step3_1" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                        <span class="text-purple-700">x +</span>
+                        <input type="text" id="step3_2" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                        <span class="text-purple-700">)</span>
+                        <button onclick="checkStep3_1()" class="bg-purple-500 text-white px-3 py-1 rounded text-sm hover:bg-purple-600">Cek</button>
+                        <span id="check3_1" class="text-sm"></span>
+                    </div>
+                    
+                    <p class="text-purple-700 mt-3">Substitusikan (4x + 9) ke dalam fungsi f:</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-purple-700">f(4x + 9) = 2(</span>
+                            <input type="text" id="step3_3" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                            <span class="text-purple-700">+ 9) +</span>
+                            <input type="text" id="step3_4" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                        </div>
+                        
+                        <div class="flex items-center space-x-2 ml-16">
+                            <span class="text-purple-700">=</span>
+                            <input type="text" id="step3_5" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                            <span class="text-purple-700">+</span>
+                            <input type="text" id="step3_6" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                            <span class="text-purple-700">+ 3</span>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2 ml-16">
+                            <span class="text-purple-700">=</span>
+                            <input type="text" id="step3_7" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                            <span class="text-purple-700">x +</span>
+                            <input type="text" id="step3_8" class="border border-gray-300 rounded px-2 py-1 w-16 text-center" placeholder="...">
+                            <button onclick="checkStep3_2()" class="bg-purple-500 text-white px-3 py-1 rounded text-sm hover:bg-purple-600">Cek</button>
+                            <span id="check3_2" class="text-sm"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Langkah 4 -->
+            <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-4">
+                <h3 class="font-semibold text-green-800 mb-3">Langkah 4: Kesimpulan</h3>
+                <div class="flex items-center space-x-2">
+                    <span class="text-green-700 font-semibold text-lg">Jadi, (f ∘ f ∘ f)(x) = f(f(f(x))) =</span>
+                    <input type="text" id="final1" class="border border-gray-300 rounded px-3 py-2 w-20 text-center font-bold" placeholder="...">
+                    <span class="text-green-700 font-semibold text-lg">x +</span>
+                    <input type="text" id="final2" class="border border-gray-300 rounded px-3 py-2 w-20 text-center font-bold" placeholder="...">
+                    <button onclick="checkFinal()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Cek Jawaban Final</button>
+                    <span id="check_final" class="text-sm font-bold"></span>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Info Pengembang -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">👩‍💻 Pengembang Aplikasi</h2>
+            <div class="flex items-center space-x-4 bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-lg">
+                <img src="https://raw.githubusercontent.com/gitachandra34-del/dunia-komposisi/main/guru%20gita.png" 
+                     alt="Gita Chandra Febriliana" 
+                     class="w-16 h-16 rounded-full border-4 border-purple-200 shadow-lg"
+                     onerror="this.src=''; this.alt='Foto tidak dapat dimuat'; this.style.display='none';">
+                <div>
+                    <h3 class="text-xl font-bold text-purple-800">Gita Chandra Febriliana</h3>
+                    <p class="text-purple-600">Pengembang LKPD Interaktif</p>
+                    <p class="text-sm text-purple-500 mt-1">Pembelajaran Matematika Digital</p>
+                </div>
+                <div class="ml-auto">
+                    <div class="text-2xl">🌟</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skor -->
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">🏆 Progress Pembelajaran</h2>
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="text-center p-4 bg-blue-50 rounded-lg">
+                    <div class="text-3xl font-bold text-blue-600" id="score">0</div>
+                    <div class="text-sm text-blue-700">Langkah Benar</div>
+                </div>
+                <div class="text-center p-4 bg-green-50 rounded-lg">
+                    <div class="text-3xl font-bold text-green-600" id="percentage">0%</div>
+                    <div class="text-sm text-green-700">Kemajuan</div>
+                </div>
+                <div class="text-center p-4 bg-purple-50 rounded-lg">
+                    <div class="text-3xl font-bold text-purple-600" id="total">6</div>
+                    <div class="text-sm text-purple-700">Total Langkah</div>
+                </div>
+            </div>
+            <div class="mt-4 bg-gray-200 rounded-full h-4">
+                <div id="progress-bar" class="bg-gradient-to-r from-blue-400 to-purple-600 h-4 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        let totalSteps = 6;
+
+        function updateScore() {
+            score++;
+            document.getElementById('score').textContent = score;
+            const percentage = Math.round((score / totalSteps) * 100);
+            document.getElementById('percentage').textContent = percentage + '%';
+            document.getElementById('progress-bar').style.width = percentage + '%';
+        }
+
+        function showResult(elementId, isCorrect, correctAnswer = '') {
+            const element = document.getElementById(elementId);
+            if (isCorrect) {
+                element.innerHTML = '✅ Benar!';
+                element.className = 'text-sm text-green-600 font-semibold';
+                updateScore();
+            } else {
+                element.innerHTML = `❌ Salah${correctAnswer ? `, jawaban: ${correctAnswer}` : ''}`;
+                element.className = 'text-sm text-red-600 font-semibold';
+            }
+        }
+
+        // Soal 1 - Langkah 2.1
+        function checkStep2_1() {
+            const val1 = document.getElementById('step2_1').value;
+            const val2 = document.getElementById('step2_2').value;
+            const isCorrect = val1 === '2' && val2 === '3';
+            showResult('check2_1', isCorrect, '2x + 3');
+        }
+
+        // Soal 1 - Langkah 2.2
+        function checkStep2_2() {
+            const val3 = document.getElementById('step2_3').value;
+            const val4 = document.getElementById('step2_4').value;
+            const val5 = document.getElementById('step2_5').value;
+            const val6 = document.getElementById('step2_6').value;
+            const val7 = document.getElementById('step2_7').value;
+            const val8 = document.getElementById('step2_8').value;
+            
+            const isCorrect = val3 === '2x' && val4 === '3' && val5 === '3' && 
+                             val6 === '4x' && val7 === '6' && val8 === '9';
+            showResult('check2_2', isCorrect, '2(2x + 3) + 3 = 4x + 6 + 3 = 4x + 9');
+        }
+
+        // Soal 1 - Final Langkah 2
+        function checkStep2Final() {
+            const val1 = document.getElementById('step2_final1').value;
+            const val2 = document.getElementById('step2_final2').value;
+            const isCorrect = val1 === '4' && val2 === '9';
+            showResult('check2_final', isCorrect, '4x + 9');
+        }
+
+        // Soal 1 - Langkah 3.1
+        function checkStep3_1() {
+            const val1 = document.getElementById('step3_1').value;
+            const val2 = document.getElementById('step3_2').value;
+            const isCorrect = val1 === '4' && val2 === '9';
+            showResult('check3_1', isCorrect, '4x + 9');
+        }
+
+        // Soal 1 - Langkah 3.2
+        function checkStep3_2() {
+            const val3 = document.getElementById('step3_3').value;
+            const val4 = document.getElementById('step3_4').value;
+            const val5 = document.getElementById('step3_5').value;
+            const val6 = document.getElementById('step3_6').value;
+            const val7 = document.getElementById('step3_7').value;
+            const val8 = document.getElementById('step3_8').value;
+            
+            const isCorrect = val3 === '4x' && val4 === '3' && val5 === '8x' && 
+                             val6 === '18' && val7 === '8' && val8 === '21';
+            showResult('check3_2', isCorrect, '2(4x + 9) + 3 = 8x + 18 + 3 = 8x + 21');
+        }
+
+        // Soal 1 - Final
+        function checkFinal() {
+            const val1 = document.getElementById('final1').value;
+            const val2 = document.getElementById('final2').value;
+            const isCorrect = val1 === '8' && val2 === '21';
+            
+            if (isCorrect) {
+                showResult('check_final', true, '8x + 21');
+                showCelebration();
+            } else {
+                showResult('check_final', false, '8x + 21');
+                showErrorNotification();
+            }
+        }
+
+        // Fungsi perayaan
+        function showCelebration() {
+            // Buat overlay perayaan
+            const overlay = document.createElement('div');
+            overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            overlay.innerHTML = `
+                <div class="bg-white rounded-2xl p-8 text-center max-w-md mx-4 transform animate-bounce">
+                    <div class="text-6xl mb-4">🎉</div>
+                    <h2 class="text-3xl font-bold text-green-600 mb-2">Selamat!</h2>
+                    <p class="text-lg text-gray-700 mb-4">Anda berhasil menyelesaikan soal fungsi komposisi bertingkat!</p>
+                    <div class="text-4xl mb-4">🏆✨🎊</div>
+                    <p class="text-sm text-gray-600 mb-4">Jawaban Anda: (f ∘ f ∘ f)(x) = 8x + 21</p>
+                    <button onclick="closeCelebration()" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        Tutup
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+            
+            // Tambahkan confetti effect
+            createConfetti();
+        }
+
+        // Fungsi pemberitahuan error
+        function showErrorNotification() {
+            const overlay = document.createElement('div');
+            overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            overlay.innerHTML = `
+                <div class="bg-white rounded-2xl p-8 text-center max-w-md mx-4">
+                    <div class="text-6xl mb-4">😔</div>
+                    <h2 class="text-2xl font-bold text-red-600 mb-2">Belum Tepat</h2>
+                    <p class="text-lg text-gray-700 mb-4">Jangan menyerah! Mari periksa kembali langkah-langkah sebelumnya.</p>
+                    <div class="bg-yellow-50 p-4 rounded-lg mb-4 text-left">
+                        <h3 class="font-semibold text-yellow-800 mb-2">💡 Tips:</h3>
+                        <ul class="text-sm text-yellow-700 space-y-1">
+                            <li>• Pastikan langkah 2 sudah benar: (f ∘ f)(x) = 4x + 9</li>
+                            <li>• Langkah 3: f(4x + 9) = 2(4x + 9) + 3</li>
+                            <li>• Hasil akhir: 8x + 18 + 3 = 8x + 21</li>
+                        </ul>
+                    </div>
+                    <button onclick="closeErrorNotification()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Coba Lagi
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+        }
+
+        // Fungsi confetti
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.cssText = `
+                        position: fixed;
+                        top: -10px;
+                        left: ${Math.random() * 100}%;
+                        width: 10px;
+                        height: 10px;
+                        background: ${colors[Math.floor(Math.random() * colors.length)]};
+                        z-index: 1000;
+                        border-radius: 50%;
+                        animation: fall 3s linear forwards;
+                    `;
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }, i * 50);
+            }
+        }
+
+        // Fungsi tutup overlay
+        function closeCelebration() {
+            const overlay = document.querySelector('.fixed.inset-0');
+            if (overlay) overlay.remove();
+        }
+
+        function closeErrorNotification() {
+            const overlay = document.querySelector('.fixed.inset-0');
+            if (overlay) overlay.remove();
+        }
+
+
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97c6aa8b84a3fce4',t:'MTc1NzQyMDcwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
